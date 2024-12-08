@@ -207,3 +207,6 @@ elif selected_page == "Forecast Table":
         file_name="forecast_data.csv",
         mime="text/csv",
     )
+
+
+    # Use This command to run the app streamlit run streamlit.py --server.port 8501 --server.headless true
