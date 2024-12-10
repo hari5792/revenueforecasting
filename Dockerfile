@@ -16,3 +16,5 @@ EXPOSE 8501
 # Step 6: Command to run the Streamlit app
 CMD ["streamlit", "run", "streamlit.py", "--server.headless=true", "--server.port=8501"]
 
+
+
