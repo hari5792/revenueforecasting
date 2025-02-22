@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: revenueforecast-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: revenueforecast-app
+  template:
+    metadata:
+      labels:
+        app: revenueforecast-app
+    spec:
+      containers:
+      - name: revenueforecast-app-container
+        image: revenueforecast-app:latest  # Ensure it matches the Minikube image
+        imagePullPolicy: IfNotPresent  # Prevent pulling from an external registry
+        ports:
+        - containerPort: 8501  # Streamlit runs on port 8501
