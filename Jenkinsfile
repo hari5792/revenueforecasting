@@ -21,25 +21,12 @@ pipeline {
             }
         }
 
-        stage('Push to Docker Hub') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    bat """
-                        echo "Logging in as: %DOCKER_HUB_USER%"
-                        echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
-                        docker push %DOCKER_IMAGE%
-                        """
-                }
-            }
-        }
-
-
         stage('Deploy Container') {
             steps {
                 script {
                     bat """
-                        docker stop %CONTAINER_NAME% || exit 0
-                        docker rm %CONTAINER_NAME% || exit 0
+                        docker stop %CONTAINER_NAME% || true
+                        docker rm %CONTAINER_NAME% || true
                         docker run -d -p 8501:8501 --name %CONTAINER_NAME% %DOCKER_IMAGE%
                     """
                 }
