@@ -25,12 +25,13 @@ pipeline {
             steps {
                 script {
                     bat """
-                        docker stop %CONTAINER_NAME% || true
-                        docker rm %CONTAINER_NAME% || true
-                        docker run -d -p 8501:8501 --name %CONTAINER_NAME% %DOCKER_IMAGE%
+                        docker stop revenueforecast_container || exit 0
+                        docker rm revenueforecast_container || exit 0
+                        docker run -d -p 8501:8501 --name revenueforecast_container hariharasudhan313/revenueforecast
                     """
                 }
             }
         }
+
     }
 }
